@@ -51,7 +51,7 @@ It starts a local server on port 8765 (if needed) and opens the game in your bro
    protects the data.
 
 6. **Enable GitHub Pages**: push to GitHub, then Settings → Pages → deploy from
-   branch (root). No build step — the site is served as-is.
+   branch `main` (root). No build step — the site is served as-is.
 
 7. **Invite player 2**: send them the URL. They sign in with their email,
    pick a name, and start picking.

@@ -9,7 +9,7 @@ Phase 2 (go-live): **backend is live**, two browser steps remain.
 - ✅ Pilot Season seeded: 2026-06-13 → 2026-07-31
 - ✅ `js/config.js` filled (anon key, safe to commit); app verified in live mode
 - ⏸️ **User, in browser:**
-  1. Enable GitHub Pages: repo settings → Pages → deploy from branch `bernd`,
+  1. Enable GitHub Pages: repo settings → Pages → deploy from branch `main`,
      root → URL will be `https://hempfele.github.io/stocks/`
   2. Supabase → Auth → URL Configuration: Site URL
      `https://hempfele.github.io/stocks/`; redirect allow list:
@@ -18,6 +18,13 @@ Phase 2 (go-live): **backend is live**, two browser steps remain.
   sign-ups** in Supabase Auth settings.
 - Note: `gh` CLI here is logged in as `beplonts_microsoft` (read-only on
   `Hempfele/stocks`), so repo settings must be changed as Hempfele in the browser.
+
+## Conventions
+
+- **Demo/test accounts are always "Bernd" and "Hempf"**: `?seed` signs you in
+  as Bernd; the fake opponent is Hempf. Use these names in any future fixtures.
+- **GitHub Pages deploys from `main`**, not `bernd`. Keep `main` updated when
+  changes should go live.
 
 ## Constraints
 

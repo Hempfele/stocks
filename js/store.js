@@ -39,7 +39,7 @@ const CATALOG = [
   { symbol: 'BKNG', name: 'Booking Holdings', exchange: 'NASDAQ', base: 3900 },
 ];
 
-const ALEX_PICKS = {
+const HEMPF_PICKS = {
   nourishment: 'NESN.SW', home: 'HD', health: 'NOVO-B.CO', energy: 'VWS.CO',
   safety: 'ALV.DE', mobility: 'SMNNY', connection: 'DTE.DE', play: 'NTDOY',
   growth: 'DUOL', dreams: 'RKLB',
@@ -97,10 +97,10 @@ function createDemoStore() {
     persist();
   }
 
-  const alexPicks = Object.entries(ALEX_PICKS).map(([areaKey, symbol]) => {
+  const hempfPicks = Object.entries(HEMPF_PICKS).map(([areaKey, symbol]) => {
     const c = CATALOG.find((x) => x.symbol === symbol);
     return {
-      player_id: 'demo-alex', area_key: areaKey, symbol, name: c.name,
+      player_id: 'demo-hempf', area_key: areaKey, symbol, name: c.name,
       currency: 'EUR', locked_price: demoPriceAt(symbol, seasonStart),
       locked_at: season.starts_at,
     };
@@ -115,13 +115,13 @@ function createDemoStore() {
     async setName(name) { state.name = name; persist(); },
     async getActiveSeason() { return season; },
     async getPlayers() {
-      const players = [{ id: 'demo-alex', display_name: 'Alex' }];
+      const players = [{ id: 'demo-hempf', display_name: 'Hempf' }];
       if (state.name) players.unshift({ id: 'demo-me', display_name: state.name });
       return players;
     },
-    async getPicks() { return [...state.picks, ...alexPicks]; },
+    async getPicks() { return [...state.picks, ...hempfPicks]; },
     async getPrices() {
-      const symbols = new Set([...state.picks, ...alexPicks].map((p) => p.symbol));
+      const symbols = new Set([...state.picks, ...hempfPicks].map((p) => p.symbol));
       return [...symbols].map((symbol) => ({
         symbol, price: demoPriceAt(symbol, today), fetched_at: today.toISOString(),
       }));
