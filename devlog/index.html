@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>🏛️ Fantasy Portfolio — Devlog</title>
+<style>
+  :root{
+    --bg:#faf6ee; --panel:#ffffff; --panel2:#f3ecdf; --ink:#2e2a24;
+    --muted:#8a8174; --line:#e8e0d2;
+    --good:#3d8b5f; --bad:#b85c5c; --accent:#c96f4a; --cool:#5d7fa3;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
+  .wrap{max-width:820px;margin:0 auto;padding:0 20px 96px}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  code,kbd{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    background:var(--panel2);padding:1px 6px;border-radius:5px;font-size:.88em}
+  h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.25}
+  header.hero{padding:56px 0 28px;border-bottom:1px solid var(--line)}
+  header.hero h1{font-size:32px;margin:0 0 6px}
+  header.hero p{color:var(--muted);margin:.3em 0}
+  .live{display:inline-block;margin-top:14px;padding:10px 16px;border-radius:9px;
+    background:var(--panel);border:1px solid var(--line);
+    color:var(--ink);font-family:ui-monospace,monospace;font-size:14px}
+  .live b{color:var(--good)}
+  nav.toc{position:sticky;top:0;background:rgba(250,246,238,.93);backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);padding:10px 0;margin:0 0 28px;font-size:13px;
+    font-family:ui-monospace,monospace;z-index:2}
+  nav.toc a{color:var(--muted);margin-right:16px}
+  nav.toc a:hover{color:var(--ink)}
+  section{padding:30px 0;border-bottom:1px solid var(--line)}
+  section h2{font-size:22px;margin:0 0 14px}
+  section h2 .em{color:var(--accent)}
+  .lead{color:var(--muted)}
+  ul{padding-left:20px}
+  li{margin:.3em 0}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:640px){.grid2{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;
+    box-shadow:0 1px 3px rgba(60,50,30,.06)}
+  .card h3{margin:0 0 8px;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;
+    font-family:ui-monospace,monospace}
+  .for li::marker{content:"✓  ";color:var(--good)}
+  .against li::marker{content:"✗  ";color:var(--bad)}
+  .phase{display:flex;gap:12px;align-items:baseline;padding:8px 0;border-bottom:1px dashed var(--line)}
+  .phase:last-child{border-bottom:0}
+  .badge{font-family:ui-monospace,monospace;font-size:11px;padding:2px 8px;border-radius:20px;white-space:nowrap}
+  .done{background:rgba(61,139,95,.12);color:var(--good);border:1px solid rgba(61,139,95,.4)}
+  .now{background:rgba(201,111,74,.12);color:var(--accent);border:1px solid rgba(201,111,74,.45)}
+  .todo{background:var(--panel2);color:var(--muted);border:1px solid var(--line)}
+  article.entry{padding:26px 0;border-bottom:1px solid var(--line)}
+  article.entry:last-child{border-bottom:0}
+  article.entry .date{font-family:ui-monospace,monospace;font-size:12px;color:var(--muted)}
+  article.entry h3{font-size:20px;margin:4px 0 12px}
+  figure{margin:18px 0}
+  figure img{width:100%;display:block;border:1px solid var(--line);border-radius:10px}
+  figcaption{color:var(--muted);font-size:13px;margin-top:7px;text-align:center}
+  .decisions{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+  @media(max-width:640px){.decisions{grid-template-columns:1fr}}
+  footer{color:var(--muted);font-size:13px;padding:30px 0 0;text-align:center}
+  .tag{font-family:ui-monospace,monospace;font-size:11px;color:var(--cool)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <h1>🏛️ Fantasy Portfolio — Devlog</h1>
+  <p><b>Fantasy Portfolio</b> — a lightweight web game: ten areas of life, one stock for each.
+     Pick the companies that reflect the life you want to see, lock €1,000 of each,
+     and watch the season unfold with your co-players.</p>
+  <p class="lead">This devlog is our shared memory: the decisions we make (and the ones we
+     turn down), what we learn, and how we work. New entries land as the game grows.</p>
+  <span class="live">▶ Run locally: <b>python3 -m http.server</b> → demo mode, zero setup <span class="tag">(GitHub Pages once live)</span></span>
+</header>
+
+<nav class="toc">
+  <a href="#goal">Goal</a>
+  <a href="#requirements">Requirements</a>
+  <a href="#timeline">Timeline</a>
+  <a href="#next">Next steps</a>
+  <a href="#take">Claude's take</a>
+  <a href="#how">How we work</a>
+  <a href="#decisions">Decisions</a>
+  <a href="#log">Devlog</a>
+</nav>
+
+<section id="goal">
+  <h2><span class="em">◆</span> The goal</h2>
+  <p>A game for two players (eventually more) born from a voice note: represent a <b>whole
+  life</b> as ten areas modeled on the hierarchy of needs — from 🍞 Nourishment up to
+  🚀 Dreams &amp; Frontier — and pick one stock for each. Picking locks the live price and
+  virtually buys <b>€1,000</b>. Over a <b>season</b> everyone watches the portfolios evolve;
+  at the end there's a winner.</p>
+  <ul>
+    <li><b>Values over analytics</b> — the choice shouldn't be based on price charts; it's about the companies you want to support and the life you want to see.</li>
+    <li><b>Together</b> — every player sees every other player's picks; the fun is in comparing worldviews.</li>
+    <li><b>Seasons</b> — picks lock when the season runs, prices reset when a new one starts.</li>
+  </ul>
+  <p class="lead">Canonical source: <code>PLAN.md</code> in the repo · original voice note transcript: <code>Fantasy Portfolio.transcript.md</code>.</p>
+</section>
+
+<section id="requirements">
+  <h2><span class="em">◆</span> Requirements &amp; hard constraints</h2>
+  <p class="lead">These are load-bearing — we don't drift from them.</p>
+  <ul>
+    <li><b>Lightweight feel.</b> No finance-app energy: numbers stay understated, no charts, no jargon. Picks and their stories come first.</li>
+    <li><b>No build step.</b> Vanilla ES modules; the repo deploys to GitHub Pages as-is.</li>
+    <li><b>Demo mode first.</b> Empty <code>js/config.js</code> runs the whole game on fake data — every change is verifiable locally in seconds.</li>
+    <li><b>Fair scoring across currencies.</b> Each pick is worth €1,000 × (current / locked price) — ratios, so EUR and USD picks compare honestly without FX.</li>
+    <li><b>Locked means locked.</b> Picks are insert-only and written server-side (edge function fetches the live quote), so locked prices can't be forged and there are no take-backs.</li>
+  </ul>
+</section>
+
+<section id="timeline">
+  <h2><span class="em">◆</span> Timeline</h2>
+  <div class="phase"><span class="badge done">DONE</span><div class="body"><b>Phase 0 — From idea to plan.</b> Voice note → local whisper transcript (new reusable <code>/transcribe</code> skill) → <code>PLAN.md</code> → architecture decisions.</div></div>
+  <div class="phase"><span class="badge done">DONE</span><div class="body"><b>Phase 1 — Playable game.</b> Sign-in, name, pick board with typeahead search, locked prices, side-by-side dashboard with leader crown. Fully playable in demo mode; Supabase schema + edge functions written and waiting in the repo.</div></div>
+  <div class="phase"><span class="badge now">NOW</span><div class="body"><b>Phase 2 — Go live.</b> Create the Supabase project, push migrations, deploy functions, seed Season 1, enable GitHub Pages, invite player 2. Steps: <code>README.md</code>.</div></div>
+  <div class="phase"><span class="badge todo">NEXT</span><div class="body"><b>Phase 3 — Season life.</b> Weekly update notification (Supabase cron + Resend, or Pi cron + Telegram), price history snapshots, season-end winner ceremony.</div></div>
+  <div class="phase"><span class="badge todo">LATER</span><div class="body"><b>Phase 4 — More life.</b> 3+ players, "why I picked this" notes on each pick, season themes, archive of past seasons.</div></div>
+</section>
+
+<section id="next">
+  <h2><span class="em">◆</span> Next steps</h2>
+  <ul>
+    <li>Create the Supabase project and walk the go-live checklist in <code>README.md</code>.</li>
+    <li>Decide Season 1 dates and seed it.</li>
+    <li>Push to GitHub, enable Pages, send the link to player 2.</li>
+    <li>First real-world test: both players pick all ten areas with real quotes.</li>
+  </ul>
+</section>
+
+<section id="take">
+  <h2><span class="em">◆</span> Claude's take</h2>
+  <div class="grid2">
+    <div class="card"><h3>What excites me</h3>
+      <ul>
+        <li>The reframe: a portfolio as a <em>self-portrait</em>. Ten picks say more about a person than any questionnaire.</li>
+        <li>Ratio scoring quietly solves the multi-currency problem with zero FX code.</li>
+        <li>The whole game is ~600 lines with no build step — it stays understandable.</li>
+      </ul>
+    </div>
+    <div class="card"><h3>Curious to explore</h3>
+      <ul>
+        <li>Pick notes ("why this company") — probably the soul of the game once added.</li>
+        <li>What a season-end "ceremony" should feel like in something this gentle.</li>
+        <li>Whether the areas themselves should be a seasonal theme (e.g. a "cities" season).</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card" style="margin-top:14px"><h3>Critique &amp; open questions</h3>
+    <ul>
+      <li>Yahoo's unofficial API is unblessed — fine for a friendly game, but if it breaks, the edge functions are the only place to swap in another source.</li>
+      <li>Demo mode locks picks at season-start prices so the board moves immediately; live mode locks at pick time. Same code path otherwise, but worth remembering when comparing.</li>
+      <li>The weekly notification channel is genuinely undecided (email vs Telegram) — deferred until the game is live and the need is real.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="how">
+  <h2><span class="em">◆</span> How we work</h2>
+  <ul>
+    <li><b>Voice first.</b> Ideas arrive as voice notes; <code>/transcribe</code> (local whisper, nothing uploaded) turns them into transcripts that live next to the idea.</li>
+    <li><b>Plan, then build.</b> Big decisions get asked as explicit either/or questions before code; the outcomes land in <a href="#decisions">Decisions</a>.</li>
+    <li><b>Demo mode is the test bench.</b> Every change is verified by playing the game locally (<code>?seed</code> pre-fills a board, <code>?reset</code> clears it) and screenshotting.</li>
+    <li><b>This devlog is maintained in parallel.</b> Every working session ends with a dated entry — what changed, decided for/against, a screenshot when visual — plus a timeline refresh. The practice is pinned in the repo's <code>CLAUDE.md</code>.</li>
+  </ul>
+</section>
+
+<section id="decisions">
+  <h2><span class="em">◆</span> Decisions</h2>
+  <p class="lead">The standing record. Per-entry decisions live in the log below.</p>
+  <div class="decisions">
+    <div class="card"><h3>Decided for</h3>
+      <ul class="for">
+        <li><b>GitHub Pages + Supabase</b> — static frontend, free tier auth/Postgres/edge functions; reachable by a remote player 2. <span class="tag">2026-06-13</span></li>
+        <li><b>Magic-link email auth</b> — no passwords, real accounts, scales to more players. <span class="tag">2026-06-13</span></li>
+        <li><b>Yahoo Finance via edge functions</b> — US + EU coverage, no API keys in the client, no CORS. <span class="tag">2026-06-13</span></li>
+        <li><b>Server-side pick locking</b> — <code>make-pick</code> fetches the quote and inserts; RLS keeps clients read-only on picks. <span class="tag">2026-06-13</span></li>
+        <li><b>Ratio-based scoring</b> — €1,000 × current/locked; mixed currencies compare fairly. <span class="tag">2026-06-13</span></li>
+        <li><b>Demo mode</b> — empty config runs the full game on fake data. <span class="tag">2026-06-13</span></li>
+      </ul>
+    </div>
+    <div class="card"><h3>Decided against (for now)</h3>
+      <ul class="against">
+        <li><b>Raspberry Pi hosting</b> — local-only; awkward for a remote second player.</li>
+        <li><b>Player codes / Google OAuth</b> — magic links won on friction vs. realness.</li>
+        <li><b>FX conversion</b> — unnecessary once scoring is ratio-based.</li>
+        <li><b>Charts &amp; analytics</b> — against the spirit; numbers stay quiet.</li>
+        <li><b>A build step / framework</b> — vanilla modules keep deploys trivial and the code legible.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="log">
+  <h2><span class="em">◆</span> Devlog</h2>
+
+  <article class="entry">
+    <div class="date">2026-06-13</div>
+    <h3>From a voice note to a playable scaffold</h3>
+    <p>The game started as a six-minute voice memo recorded on the Desktop. A new reusable
+    <code>/transcribe</code> skill (local whisper, <code>afconvert</code> → 16&nbsp;kHz WAV) turned it into a
+    transcript; from there came <code>PLAN.md</code>, two explicit architecture decisions, and by the
+    end of the session a fully playable game in demo mode: sign in, name yourself, pick stocks
+    for ten life areas via typeahead search, lock them in, and watch the dashboard compare
+    players — crown included.</p>
+    <figure>
+      <img src="img/2026-06-13-signin.png" alt="Sign-in screen">
+      <figcaption>The front door: ten areas of life, one stock for each.</figcaption>
+    </figure>
+    <figure>
+      <img src="img/2026-06-13-dashboard.png" alt="Dashboard with two players">
+      <figcaption>Demo mode: Alex (👑, +10.5%) vs Bernd (+0.6%), two areas still waiting for a pick.</figcaption>
+    </figure>
+    <p>Supabase is fully prepared but not yet live: <code>001_init.sql</code> (schema + RLS) and three
+    edge functions (<code>stock-search</code>, <code>make-pick</code>, <code>refresh-prices</code>) sit in the repo,
+    with the go-live checklist in <code>README.md</code>.</p>
+    <div class="decisions">
+      <div class="card"><h3>Decided for</h3><ul class="for">
+        <li>GitHub Pages + Supabase over Pi hosting (remote player 2 needs a real URL).</li>
+        <li>Magic-link email over player codes and Google OAuth.</li>
+        <li>Ratio scoring (€1,000 × current/locked) — FX problem dissolved.</li>
+        <li>Demo locks at season-start prices so a fresh board moves immediately.</li>
+        <li><code>?seed</code> / <code>?reset</code> URL params as the demo test bench.</li>
+      </ul></div>
+      <div class="card"><h3>Decided against</h3><ul class="against">
+        <li>Client-side price locking — too forgeable, even among friends.</li>
+        <li>Any chart library or framework — the whole game is vanilla modules.</li>
+        <li>Building notifications now — channel (email vs Telegram) decided once the game is live.</li>
+      </ul></div>
+    </div>
+  </article>
+
+</section>
+
+<footer>
+  🏛️ Fantasy Portfolio · built by Bernd &amp; Claude · devlog format borrowed from ♨ OYU
+</footer>
+
+</div>
+</body>
+</html>
