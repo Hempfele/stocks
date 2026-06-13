@@ -6,7 +6,7 @@ hierarchy of needs, one stock for each. Picking locks the live price and virtual
 
 Not about money and analytics — about the companies that reflect the life you want to see.
 
-📋 Game design and phases: [PLAN.md](PLAN.md) · 📓 Devlog: [devlog/](devlog/)
+📋 Game design and phases: [PLAN.md](PLAN.md) · 📓 Devlog: [devlog/](devlog/) · 🔐 Security & data model: [SECURITY.md](SECURITY.md)
 
 ## Test locally
 

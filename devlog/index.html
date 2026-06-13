@@ -203,10 +203,50 @@
   <h2><span class="em">◆</span> Devlog</h2>
 
   <article class="entry">
+    <div class="date">2026-06-13 · night</div>
+    <h3>Where the data lives, and who holds the keys</h3>
+    <p>Before inviting player 2, we wrote down how trust actually works in this game —
+    the full reference is <code>SECURITY.md</code> in the repo; this is the story version.</p>
+    <p><b>GitHub Pages is not a backend.</b> It serves the same static files
+    <code>./play.sh</code> serves from localhost — HTML, CSS, JavaScript, and one committed key.
+    All real data lives in exactly one place: a Postgres database at Supabase (eu-west-1,
+    Ireland). Whether the game runs on Pages or locally, your <em>browser</em> talks straight
+    to that database over HTTPS. The only real difference between live and local is the URL
+    in the address bar — which is why both origins sit in the magic-link redirect allow list.</p>
+    <p><b>The committed key is supposed to be public.</b> <code>js/config.js</code> openly carries
+    the <em>anon key</em> — Supabase calls it "publishable" because it grants only what
+    row-level security allows, and for a stranger that is nothing at all: every table denies
+    anonymous access. Signed-in players can read the whole game (seeing each other's picks
+    <em>is</em> the game) but write only their own name. The dangerous key — the
+    <em>service role</em>, which bypasses RLS — exists only inside Supabase's edge-function
+    runtime. It has never been in the repo and never reaches a browser.</p>
+    <p><b>Locked means locked, says Postgres.</b> No player can write a pick directly. The
+    only path is the <code>make-pick</code> function: verify who you are, check the season is
+    active, fetch the live quote server-side, insert. No update policy, no delete policy, one
+    pick per area by unique constraint. Honesty isn't a UI feature here; it's a database
+    constraint.</p>
+    <p>The one honest gap: until "allow new sign-ups" is switched off, anyone with the URL
+    could join and watch. The fix is one toggle, flipped after both players are in. And the
+    threat model stays humble — this protects a friendly game from accidents and cheating,
+    not from someone who controls your email inbox. No real money ever moves.</p>
+    <div class="decisions">
+      <div class="card"><h3>Decided for</h3><ul class="for">
+        <li><code>SECURITY.md</code> as the canonical reference — tables for keys, storage, and policies.</li>
+        <li>Saying plainly that magic-link identity = inbox control; that's the trust anchor.</li>
+      </ul></div>
+      <div class="card"><h3>Decided against</h3><ul class="against">
+        <li>Pretending the anon key is a secret — rotating or hiding it adds nothing once RLS does the work.</li>
+        <li>A stricter threat model — proportionality: it's a game between friends, not a bank.</li>
+      </ul></div>
+    </div>
+  </article>
+
+  <article class="entry">
     <div class="date">2026-06-13 · evening</div>
     <h3>The backend goes live</h3>
     <p>Third session of day one, and the game has a real spine: schema pushed to Supabase
-    (Frankfurt), all three edge functions deployed, and <code>stock-search</code> answering with
+    (eu-west-1, Ireland — an earlier draft said Frankfurt; the dashboard knows better), all
+    three edge functions deployed, and <code>stock-search</code> answering with
     live Yahoo data — type "nintendo" and Tokyo, Frankfurt, and OTC listings come back.
     <code>js/config.js</code> now carries the real project URL and anon key, so the local app runs
     in live mode with genuine email sign-in.</p>
