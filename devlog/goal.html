@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>🏛️ Fantasy Portfolio — Goal</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="nav-left">
+    <a class="blog-title" href="./">Fantasy Portfolio</a>
+    <nav aria-label="Devlog">
+      <a class="active" href="goal.html">Goal</a>
+      <a href="decisions.html">Decisions</a>
+    </nav>
+  </div>
+  <div class="nav-right">
+    <a class="play-link" href="../index.html">Play</a>
+  </div>
+</header>
+
+<main id="top">
+<header class="hero">
+  <h1>Goal</h1>
+  <p class="short">A game for two players (eventually more) born from a voice note: represent a <b>whole
+  life</b> as ten areas modeled on the hierarchy of needs — from 🍞 Nourishment up to
+  🚀 Dreams &amp; Frontier — and pick one stock for each. Picking locks the live price and
+  virtually buys <b>€1,000</b>. Over a <b>season</b> everyone watches the portfolios evolve;
+  at the end there's a winner.</p>
+  <ul class="hero-points">
+    <li><b>Values over analytics</b> — the choice shouldn't be based on price charts; it's about the companies you want to support and the life you want to see.</li>
+    <li><b>Together</b> — every player sees every other player's picks; the fun is in comparing worldviews.</li>
+    <li><b>Seasons</b> — picks lock when the season runs, prices reset when a new one starts.</li>
+  </ul>
+</header>
+
+<section>
+  <h2>Requirements</h2>
+  <ul>
+    <li><b>Lightweight feel.</b> No finance-app energy: numbers stay understated, no charts, no jargon. Picks and their stories come first.</li>
+    <li><b>No build step.</b> Vanilla ES modules; the repo deploys to GitHub Pages as-is.</li>
+    <li><b>Demo mode first.</b> Empty <code>js/config.js</code> runs the full game on fake data.</li>
+    <li><b>Fair scoring across currencies.</b> €1,000 × current / locked price.</li>
+    <li><b>Locked means locked.</b> Picks are insert-only and written server-side.</li>
+  </ul>
+  <p class="section-note">Canonical source: <code>PLAN.md</code> in the repo · original voice note transcript: <code>Fantasy Portfolio.transcript.md</code>.</p>
+</section>
+
+<section>
+  <h2>Open questions</h2>
+  <ul>
+    <li>Pick notes ("why this company") are probably the soul of the game once added.</li>
+    <li>What should a gentle season-end ceremony feel like?</li>
+    <li>Could the areas themselves become seasonal themes?</li>
+  </ul>
+</section>
+
+<footer>
+  🏛️ Fantasy Portfolio · built by Bernd &amp; Claude · devlog format borrowed from ♨ OYU
+</footer>
+</main>
+</body>
+</html>
