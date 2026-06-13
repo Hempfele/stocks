@@ -114,9 +114,10 @@ input:focus {
   font-weight: 400;
 }
 .logo-mark {
-  width: 1.15rem;
-  height: 1.15rem;
+  width: 1.05em;
+  height: 1.05em;
   flex: 0 0 auto;
+  transform: translateY(.04em);
 }
 .season {
   flex: 1;
