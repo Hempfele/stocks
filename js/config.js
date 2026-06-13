@@ -5,4 +5,6 @@ export const config = {
   SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd0amJ6bXZobWRhdnZkaWtxYm5nIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEyOTgwOTYsImV4cCI6MjA5Njg3NDA5Nn0.vhPY8MroWtiDr-kG81J_QASf3NLaVgZjYqdmSSzDBxs',
 };
 
-export const isDemo = !config.SUPABASE_URL;
+// `?demo` in the URL forces demo mode even with a live config — handy for
+// local testing without touching real data (combine with `?demo&seed`).
+export const isDemo = !config.SUPABASE_URL || new URLSearchParams(location.search).has('demo');

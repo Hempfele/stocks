@@ -8,17 +8,22 @@ Not about money and analytics — about the companies that reflect the life you 
 
 📋 Game design and phases: [PLAN.md](PLAN.md) · 📓 Devlog: [devlog/](devlog/)
 
-## Run it now (demo mode)
+## Test locally
 
-No setup needed. Serve the folder and open it:
+One command:
 
 ```sh
-python3 -m http.server 8000
-# → http://localhost:8000
+./play.sh demo    # offline demo: fake players, pre-filled board, no real data touched
+./play.sh fresh   # offline demo from a blank slate
+./play.sh         # live backend: real magic-link sign-in and real picks
 ```
 
-With `js/config.js` left empty the game runs on fake players and prices —
-sign in with one click, pick stocks, see the dashboard move day by day.
+It starts a local server on port 8765 (if needed) and opens the game in your browser.
+
+- Demo mode (`?demo` in the URL) runs entirely on fake data — even with a live
+  `js/config.js`. Extra URL params: `&seed` pre-fills a board, `&reset` clears it.
+- Live mode locally requires `http://localhost:8765/*` in Supabase → Auth →
+  URL Configuration → Redirect URLs (magic links must be allowed to land there).
 
 ## Go live (GitHub Pages + Supabase)
 

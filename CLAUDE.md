@@ -40,8 +40,9 @@ Phase 2 (go-live): **backend is live**, two browser steps remain.
 
 ## Verification
 
-- Serve locally (`python3 -m http.server 8000`) or use the `run-web` skill;
-  demo mode must let you: sign in → set name → pick all 10 areas via search →
+- `./play.sh demo` (offline, seeded board) / `./play.sh fresh` (blank) /
+  `./play.sh` (live backend) — serves on port 8765 and opens the browser.
+  Demo mode must let you: sign in → set name → pick all 10 areas via search →
   see the dashboard with both players and moving values.
 - Supabase changes: keep `supabase/migrations/` and `supabase/functions/` in
   sync with what's deployed; go-live steps live in README.md.
