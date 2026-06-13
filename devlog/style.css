@@ -72,7 +72,18 @@ h1, h2, h3 {
   gap: 1rem;
   align-items: baseline;
 }
-.blog-title { color: var(--theme-text); }
+.blog-title {
+  display: inline-flex;
+  gap: .45rem;
+  align-items: center;
+  color: var(--theme-text);
+}
+.brand-mark {
+  width: 1.15rem;
+  height: 1.15rem;
+  flex: 0 0 auto;
+  border-radius: 5px;
+}
 nav a {
   color: rgba(var(--theme-body-rgb), .6);
   font-size: 1rem;
@@ -104,12 +115,6 @@ nav a.active {
   padding: 4rem 0 2rem;
   border-bottom: 1px solid var(--theme-surface0);
 }
-.hero:has(.need-pyramid) {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 12rem;
-  gap: 2rem;
-  align-items: center;
-}
 .kicker, .date, .tag, .badge {
   color: var(--theme-overlay0);
   font-size: .9rem;
@@ -133,36 +138,6 @@ nav a.active {
 .hero-points li {
   margin: .25rem 0;
 }
-.need-pyramid {
-  width: 11rem;
-  height: 9rem;
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  grid-template-rows: repeat(10, 1fr);
-  gap: 2px;
-  opacity: .9;
-}
-.need-pyramid span {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 0;
-  color: var(--theme-accent);
-  background: var(--theme-generated-base);
-  border: 1px solid var(--theme-generated-border);
-  font-size: .62rem;
-  line-height: 1;
-}
-.need-pyramid span:nth-child(1) { grid-column: 5 / 7; grid-row: 1; }
-.need-pyramid span:nth-child(2) { grid-column: 5 / 7; grid-row: 2; }
-.need-pyramid span:nth-child(3) { grid-column: 4 / 8; grid-row: 3; }
-.need-pyramid span:nth-child(4) { grid-column: 4 / 8; grid-row: 4; }
-.need-pyramid span:nth-child(5) { grid-column: 3 / 9; grid-row: 5; }
-.need-pyramid span:nth-child(6) { grid-column: 3 / 9; grid-row: 6; }
-.need-pyramid span:nth-child(7) { grid-column: 2 / 10; grid-row: 7; }
-.need-pyramid span:nth-child(8) { grid-column: 2 / 10; grid-row: 8; }
-.need-pyramid span:nth-child(9) { grid-column: 1 / 11; grid-row: 9; }
-.need-pyramid span:nth-child(10) { grid-column: 1 / 11; grid-row: 10; }
 section {
   padding: 2rem 0;
   border-bottom: 1px solid var(--theme-surface0);
@@ -198,14 +173,6 @@ section > h2 {
   body { padding: 16px; }
   .topbar { align-items: flex-start; }
   .hero { padding: 2.5rem 0 1.5rem; }
-  .hero:has(.need-pyramid) {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  .need-pyramid {
-    width: 9rem;
-    height: 7.4rem;
-  }
   .split-list { grid-template-columns: 1fr; }
   .split-list > div + div {
     padding-left: 0;

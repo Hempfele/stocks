@@ -42,7 +42,7 @@ function render() {
 function renderSignIn() {
   app.innerHTML = `
     <div class="hero">
-      <div class="hero-emoji">🏛️</div>
+      <img class="hero-mark" src="assets/fantasy-portfolio-icon.svg" alt="">
       <h1>Fantasy Portfolio</h1>
       <p class="tagline">Ten areas of life. One stock for each.<br>
         Pick the companies that reflect the life you want to see.</p>
@@ -66,7 +66,7 @@ function renderSignIn() {
 function renderName() {
   app.innerHTML = `
     <div class="hero">
-      <div class="hero-emoji">👋</div>
+      <img class="hero-mark" src="assets/fantasy-portfolio-icon.svg" alt="">
       <h1>Welcome!</h1>
       <p class="tagline">What should the other players call you?</p>
       <form id="name-form" class="stack">
@@ -85,7 +85,7 @@ function renderName() {
 function renderShell(content) {
   app.innerHTML = `
     <header class="bar">
-      <span class="logo">🏛️ Fantasy Portfolio</span>
+      <span class="logo"><img class="logo-mark" src="assets/fantasy-portfolio-icon.svg" alt="">Fantasy Portfolio</span>
       ${state.season ? `<span class="season">${esc(state.season.name)} · ${daysLeft()} days left</span>` : ''}
       <button id="signout" class="ghost">Sign out</button>
     </header>

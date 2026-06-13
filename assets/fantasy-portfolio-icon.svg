@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Fantasy Portfolio">
+  <defs>
+    <clipPath id="heart">
+      <path d="M256 348c-74-48-132-89-132-146 0-43 33-73 77-73 26 0 45 10 55 29 10-19 29-29 55-29 44 0 77 30 77 73 0 57-58 98-132 146z"/>
+    </clipPath>
+  </defs>
+  <path d="M256 348c-74-48-132-89-132-146 0-43 33-73 77-73 26 0 45 10 55 29 10-19 29-29 55-29 44 0 77 30 77 73 0 57-58 98-132 146z" fill="#c9a7ff"/>
+  <g clip-path="url(#heart)">
+    <rect x="104" y="174" width="304" height="42" fill="#cfaaff"/>
+    <rect x="104" y="234" width="304" height="42" fill="#8839ef"/>
+    <rect x="104" y="294" width="304" height="42" fill="#a678ff"/>
+  </g>
+  <path d="M172 342h168l-84 84z" fill="#2b2f43"/>
+</svg>
