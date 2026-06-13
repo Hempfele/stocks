@@ -34,6 +34,15 @@ create table public.prices (
   fetched_at timestamptz not null default now()
 );
 
+-- One closing price per symbol per day. Powers weekly updates, sparklines,
+-- and frozen final standings for past seasons.
+create table public.price_snapshots (
+  symbol text not null,
+  day date not null default current_date,
+  price numeric not null,
+  primary key (symbol, day)
+);
+
 -- Row-level security: players see everything, write only their own profile.
 -- Picks and prices are written exclusively by edge functions (service role
 -- bypasses RLS), so locked prices can't be forged from the client.
@@ -41,6 +50,7 @@ alter table public.players enable row level security;
 alter table public.seasons enable row level security;
 alter table public.picks  enable row level security;
 alter table public.prices enable row level security;
+alter table public.price_snapshots enable row level security;
 
 create policy "players readable by players" on public.players
   for select to authenticated using (true);
@@ -54,6 +64,8 @@ create policy "seasons readable" on public.seasons
 create policy "picks readable" on public.picks
   for select to authenticated using (true);
 create policy "prices readable" on public.prices
+  for select to authenticated using (true);
+create policy "price snapshots readable" on public.price_snapshots
   for select to authenticated using (true);
 
 -- Seed the first season (adjust dates before going live):

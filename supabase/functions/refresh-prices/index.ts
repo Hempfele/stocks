@@ -38,6 +38,7 @@ Deno.serve(async (req) => {
           symbol: quote.symbol, price: quote.price, currency: quote.currency,
           fetched_at: new Date().toISOString(),
         });
+        await admin.from('price_snapshots').upsert({ symbol: quote.symbol, price: quote.price });
         refreshed++;
       } catch (e) {
         console.warn(`refresh failed for ${symbol}:`, (e as Error).message);

@@ -120,7 +120,7 @@
   <h2><span class="em">◆</span> Timeline</h2>
   <div class="phase"><span class="badge done">DONE</span><div class="body"><b>Phase 0 — From idea to plan.</b> Voice note → local whisper transcript (new reusable <code>/transcribe</code> skill) → <code>PLAN.md</code> → architecture decisions.</div></div>
   <div class="phase"><span class="badge done">DONE</span><div class="body"><b>Phase 1 — Playable game.</b> Sign-in, name, pick board with typeahead search, locked prices, side-by-side dashboard with leader crown. Fully playable in demo mode; Supabase schema + edge functions written and waiting in the repo.</div></div>
-  <div class="phase"><span class="badge now">NOW</span><div class="body"><b>Phase 2 — Go live.</b> Create the Supabase project, push migrations, deploy functions, seed Season 1, enable GitHub Pages, invite player 2. Steps: <code>README.md</code>.</div></div>
+  <div class="phase"><span class="badge now">NOW</span><div class="body"><b>Phase 2 — Go live.</b> <em>In progress (2026-06-13): Supabase project created, CLI installed, schema extended with <code>price_snapshots</code>. Remaining: login → link → db push → deploy functions → seed Season 1 → GitHub Pages → invite player 2.</em> Steps: <code>README.md</code> + <code>CLAUDE.md</code> status.</div></div>
   <div class="phase"><span class="badge todo">NEXT</span><div class="body"><b>Phase 3 — Season life.</b> Weekly update notification (Supabase cron + Resend, or Pi cron + Telegram), price history snapshots, season-end winner ceremony.</div></div>
   <div class="phase"><span class="badge todo">LATER</span><div class="body"><b>Phase 4 — More life.</b> 3+ players, "why I picked this" notes on each pick, season themes, archive of past seasons.</div></div>
 </section>
@@ -128,10 +128,10 @@
 <section id="next">
   <h2><span class="em">◆</span> Next steps</h2>
   <ul>
-    <li>Create the Supabase project and walk the go-live checklist in <code>README.md</code>.</li>
+    <li><code>supabase login</code>, then link the project, <code>db push</code>, deploy the three functions.</li>
     <li>Decide Season 1 dates and seed it.</li>
-    <li>Push to GitHub, enable Pages, send the link to player 2.</li>
-    <li>First real-world test: both players pick all ten areas with real quotes.</li>
+    <li>Enable GitHub Pages, set the Supabase auth Site URL, fill <code>js/config.js</code>.</li>
+    <li>Both players sign in → disable public sign-ups → first real picks with live quotes.</li>
   </ul>
 </section>
 
@@ -184,6 +184,7 @@
         <li><b>Server-side pick locking</b> — <code>make-pick</code> fetches the quote and inserts; RLS keeps clients read-only on picks. <span class="tag">2026-06-13</span></li>
         <li><b>Ratio-based scoring</b> — €1,000 × current/locked; mixed currencies compare fairly. <span class="tag">2026-06-13</span></li>
         <li><b>Demo mode</b> — empty config runs the full game on fake data. <span class="tag">2026-06-13</span></li>
+        <li><b>Daily price snapshots</b> — <code>price_snapshots</code> keeps one close per symbol per day; history can't be backfilled later. <span class="tag">2026-06-13</span></li>
       </ul>
     </div>
     <div class="card"><h3>Decided against (for now)</h3>
@@ -200,6 +201,33 @@
 
 <section id="log">
   <h2><span class="em">◆</span> Devlog</h2>
+
+  <article class="entry">
+    <div class="date">2026-06-13 · later that day</div>
+    <h3>The database gets a memory</h3>
+    <p>Second session: we talked through the database before going live. The trust model held
+    up under discussion — anon key public by design, RLS for reads, picks writable only by the
+    <code>make-pick</code> edge function — but one gap surfaced: <code>prices</code> only kept the
+    <em>latest</em> quote, throwing the past away. So the schema grew
+    <code>price_snapshots</code>: one closing price per symbol per day, fed automatically by both
+    edge functions. Cheap now, impossible to backfill later; it also gives past seasons frozen
+    final standings for free.</p>
+    <p>Go-live is half walked: the Supabase project exists (Frankfurt), the CLI is installed,
+    and the next session starts with <code>supabase login</code> → link → push → deploy. The
+    checklist lives in <code>CLAUDE.md</code> under "Current status".</p>
+    <div class="decisions">
+      <div class="card"><h3>Decided for</h3><ul class="for">
+        <li><code>price_snapshots</code> (symbol, day, price) — daily closes via upsert from <code>make-pick</code> and <code>refresh-prices</code>.</li>
+        <li>Anon key + project URL committed openly — that's the Supabase model; RLS is the lock.</li>
+        <li>Close public sign-ups in Supabase once both players are in — the simple answer to "anyone can join".</li>
+      </ul></div>
+      <div class="card"><h3>Decided against</h3><ul class="against">
+        <li>A frozen "final value" column on seasons — snapshots reconstruct it, no special case needed.</li>
+        <li>In-game season administration — Season 1 gets seeded by hand; revisit if it ever chafes.</li>
+        <li>Hiding the config behind a proxy — security theater once RLS is doing the real work.</li>
+      </ul></div>
+    </div>
+  </article>
 
   <article class="entry">
     <div class="date">2026-06-13</div>

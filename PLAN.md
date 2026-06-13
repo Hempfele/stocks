@@ -37,6 +37,7 @@ A lightweight web game for two players (later more). Each player builds a **life
 - `seasons` — name, starts_at, ends_at (active season = today within range)
 - `picks` — season, player, area_key, symbol, name, locked_price, locked_at; unique per (season, player, area); insert-only (no edits once locked), written server-side by the `make-pick` function so the locked price is trustworthy
 - `prices` — latest quote per symbol, refreshed by the `refresh-prices` function (throttled)
+- `price_snapshots` — one closing price per symbol per day (fed automatically by `make-pick` and `refresh-prices`); powers weekly updates, sparklines, and frozen standings for past seasons
 
 ### Edge Functions
 

@@ -47,6 +47,7 @@ Deno.serve(async (req) => {
       symbol: quote.symbol, price: quote.price, currency: quote.currency,
       fetched_at: new Date().toISOString(),
     });
+    await admin.from('price_snapshots').upsert({ symbol: quote.symbol, price: quote.price });
 
     return json({ pick });
   } catch (e) {

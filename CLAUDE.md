@@ -1,5 +1,19 @@
 # Fantasy Portfolio — working notes
 
+## Current status (2026-06-13) — pick up here
+
+Phase 2 (go-live) is **half done**:
+
+- ✅ Supabase project created: `https://gtjbzmvhmdavvdikqbng.supabase.co` (ref `gtjbzmvhmdavvdikqbng`)
+- ✅ Supabase CLI installed (brew)
+- ⏸️ **Next action:** `supabase login` (interactive, user must run it), then
+  `supabase link --project-ref gtjbzmvhmdavvdikqbng` → `supabase db push` →
+  `supabase functions deploy stock-search make-pick refresh-prices`
+- Then: seed Season 1 (dates TBD), set auth Site URL to the Pages URL
+  (+ `http://localhost:8765` for local), fill `js/config.js` (URL + anon key,
+  safe to commit), and after both players signed in: disable public sign-ups
+  in Supabase Auth settings.
+
 ## Constraints
 
 - **No build step.** Vanilla ES modules only; the repo deploys to GitHub Pages as-is.
