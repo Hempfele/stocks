@@ -120,7 +120,7 @@
   <h2><span class="em">◆</span> Timeline</h2>
   <div class="phase"><span class="badge done">DONE</span><div class="body"><b>Phase 0 — From idea to plan.</b> Voice note → local whisper transcript (new reusable <code>/transcribe</code> skill) → <code>PLAN.md</code> → architecture decisions.</div></div>
   <div class="phase"><span class="badge done">DONE</span><div class="body"><b>Phase 1 — Playable game.</b> Sign-in, name, pick board with typeahead search, locked prices, side-by-side dashboard with leader crown. Fully playable in demo mode; Supabase schema + edge functions written and waiting in the repo.</div></div>
-  <div class="phase"><span class="badge now">NOW</span><div class="body"><b>Phase 2 — Go live.</b> <em>In progress (2026-06-13): Supabase project created, CLI installed, schema extended with <code>price_snapshots</code>. Remaining: login → link → db push → deploy functions → seed Season 1 → GitHub Pages → invite player 2.</em> Steps: <code>README.md</code> + <code>CLAUDE.md</code> status.</div></div>
+  <div class="phase"><span class="badge now">NOW</span><div class="body"><b>Phase 2 — Go live.</b> <em>Nearly done (2026-06-13): schema pushed, functions deployed and smoke-tested, Pilot Season (Jun 13 – Jul 31) seeded, config filled. Remaining: enable GitHub Pages + set auth Site URL (browser), invite player 2.</em> Steps: <code>CLAUDE.md</code> status.</div></div>
   <div class="phase"><span class="badge todo">NEXT</span><div class="body"><b>Phase 3 — Season life.</b> Weekly update notification (Supabase cron + Resend, or Pi cron + Telegram), price history snapshots, season-end winner ceremony.</div></div>
   <div class="phase"><span class="badge todo">LATER</span><div class="body"><b>Phase 4 — More life.</b> 3+ players, "why I picked this" notes on each pick, season themes, archive of past seasons.</div></div>
 </section>
@@ -128,10 +128,10 @@
 <section id="next">
   <h2><span class="em">◆</span> Next steps</h2>
   <ul>
-    <li><code>supabase login</code>, then link the project, <code>db push</code>, deploy the three functions.</li>
-    <li>Decide Season 1 dates and seed it.</li>
-    <li>Enable GitHub Pages, set the Supabase auth Site URL, fill <code>js/config.js</code>.</li>
+    <li>Enable GitHub Pages (branch <code>bernd</code>, root) → <code>https://hempfele.github.io/stocks/</code>.</li>
+    <li>Supabase auth URL configuration: Site URL = Pages URL, allow <code>http://localhost:8765/*</code>.</li>
     <li>Both players sign in → disable public sign-ups → first real picks with live quotes.</li>
+    <li>First weekly check-in: does the Pilot Season feel right?</li>
   </ul>
 </section>
 
@@ -201,6 +201,32 @@
 
 <section id="log">
   <h2><span class="em">◆</span> Devlog</h2>
+
+  <article class="entry">
+    <div class="date">2026-06-13 · evening</div>
+    <h3>The backend goes live</h3>
+    <p>Third session of day one, and the game has a real spine: schema pushed to Supabase
+    (Frankfurt), all three edge functions deployed, and <code>stock-search</code> answering with
+    live Yahoo data — type "nintendo" and Tokyo, Frankfurt, and OTC listings come back.
+    <code>js/config.js</code> now carries the real project URL and anon key, so the local app runs
+    in live mode with genuine email sign-in.</p>
+    <p>The <b>Pilot Season</b> is seeded: <b>2026-06-13 → 2026-07-31</b> — a short ~7-week test
+    season to learn how the game actually feels before committing to a long one. Seeding went in
+    as migration <code>002</code> after a more cavalier route (service key on the command line) was
+    rightly blocked; migrations keep it reproducible anyway.</p>
+    <p>Two browser steps remain before player 2 gets a link: enabling GitHub Pages and pointing
+    Supabase's auth Site URL at it. Checklist: <code>CLAUDE.md</code>.</p>
+    <div class="decisions">
+      <div class="card"><h3>Decided for</h3><ul class="for">
+        <li>Pilot Season (~7 weeks) over a full quarter — test the rules before committing.</li>
+        <li>Season seeding via migration — reproducible, versioned, no secrets in shell history.</li>
+        <li>Seasons start the day they're created — picks need an active season to lock prices.</li>
+      </ul></div>
+      <div class="card"><h3>Decided against</h3><ul class="against">
+        <li>Scripting dashboard-only steps (Pages, auth URLs) with borrowed credentials — two honest browser clicks instead.</li>
+      </ul></div>
+    </div>
+  </article>
 
   <article class="entry">
     <div class="date">2026-06-13 · later that day</div>
