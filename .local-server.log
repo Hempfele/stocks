@@ -1,0 +1,16 @@
+127.0.0.1 - - [10/Jul/2026 21:34:59] "GET /index.html HTTP/1.1" 200 -
+127.0.0.1 - - [10/Jul/2026 21:34:59] "GET /index.html HTTP/1.1" 200 -
+127.0.0.1 - - [10/Jul/2026 21:34:59] "GET /css/style.css HTTP/1.1" 200 -
+127.0.0.1 - - [10/Jul/2026 21:34:59] "GET /js/app.js HTTP/1.1" 200 -
+127.0.0.1 - - [10/Jul/2026 21:34:59] "GET /js/areas.js HTTP/1.1" 200 -
+127.0.0.1 - - [10/Jul/2026 21:34:59] "GET /js/config.js HTTP/1.1" 200 -
+127.0.0.1 - - [10/Jul/2026 21:34:59] "GET /js/store.js HTTP/1.1" 200 -
+127.0.0.1 - - [10/Jul/2026 21:35:03] "GET /assets/fantasy-portfolio-icon.svg HTTP/1.1" 200 -
+127.0.0.1 - - [10/Jul/2026 21:35:18] "GET /index.html HTTP/1.1" 200 -
+127.0.0.1 - - [10/Jul/2026 21:35:18] "GET /index.html HTTP/1.1" 200 -
+127.0.0.1 - - [10/Jul/2026 21:35:18] "GET /index.html?demo&seed HTTP/1.1" 200 -
+127.0.0.1 - - [10/Jul/2026 21:35:28] "GET /index.html HTTP/1.1" 200 -
+127.0.0.1 - - [10/Jul/2026 21:35:28] "GET /index.html HTTP/1.1" 200 -
+127.0.0.1 - - [10/Jul/2026 21:35:28] "GET /index.html HTTP/1.1" 200 -
+127.0.0.1 - - [13/Jul/2026 18:32:04] code 404, message File not found
+127.0.0.1 - - [13/Jul/2026 18:32:04] "GET /docs/blog/ HTTP/1.1" 404 -
