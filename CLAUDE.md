@@ -47,8 +47,9 @@ Phase 2 (go-live): **backend is live**, two browser steps remain.
 
 ## Verification
 
-- `./play.sh demo` (offline, seeded board) / `./play.sh fresh` (blank) /
-  `./play.sh` (live backend) — serves on port 8765 and opens the browser.
+- `./play.sh` or `./play.sh demo` (offline, seeded board) /
+  `./play.sh fresh` (blank) / `./play.sh live` (live backend) — serves on
+  port 8765 and opens the browser.
   Demo mode must let you: sign in → set name → pick all 10 areas via search →
   see the dashboard with both players and moving values.
 - Supabase changes: keep `supabase/migrations/` and `supabase/functions/` in

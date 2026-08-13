@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fantasy Portfolio — Decisions</title>
+<link rel="icon" href="../assets/fantasy-portfolio-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="nav-left">
+    <a class="blog-title" href="./"><img class="brand-mark" src="../assets/fantasy-portfolio-icon.svg" alt="">Fantasy Portfolio</a>
+    <nav aria-label="Devlog">
+      <a href="goal.html">Goal</a>
+      <a class="active" href="decisions.html">Decisions</a>
+    </nav>
+  </div>
+  <div class="nav-right">
+    <a class="play-link" href="../index.html">Play</a>
+  </div>
+</header>
+
+<main id="top">
+<header class="hero">
+  <h1>Decisions</h1>
+  <p class="short">The durable choices behind Fantasy Portfolio: how it is built, what it protects, and what we deliberately keep out so the game stays lightweight.</p>
+</header>
+
+<section>
+  <h2>Technical</h2>
+  <p class="section-note">The architectural choices that make the game playable, trustworthy, and easy to host.</p>
+  <ul class="for">
+    <li><b>GitHub Pages + Supabase</b> — static frontend, free tier auth/Postgres/edge functions; reachable by a remote player 2. <span class="tag">2026-06-13</span></li>
+    <li><b>Magic-link email auth</b> — no passwords, real accounts, scales to more players. <span class="tag">2026-06-13</span></li>
+    <li><b>Yahoo Finance via edge functions</b> — US + EU coverage, no API keys in the client, no CORS. <span class="tag">2026-06-13</span></li>
+    <li><b>Server-side pick locking</b> — <code>make-pick</code> fetches the quote and inserts; RLS keeps clients read-only on picks. <span class="tag">2026-06-13</span></li>
+    <li><b>Ratio-based scoring</b> — €1,000 × current/locked; mixed currencies compare fairly. <span class="tag">2026-06-13</span></li>
+    <li><b>Demo mode</b> — empty config runs the full game on fake data. <span class="tag">2026-06-13</span></li>
+    <li><b>Daily price snapshots</b> — <code>price_snapshots</code> keeps one close per symbol per day; history can't be backfilled later. <span class="tag">2026-06-13</span></li>
+  </ul>
+</section>
+
+<section>
+  <h2>Do's / Don'ts</h2>
+  <p class="section-note">The working rules and tradeoffs that keep the project small, honest, and in the right spirit.</p>
+  <div class="split-list">
+    <div><h3>Do's</h3>
+      <ul class="for">
+        <li><b>Voice first.</b> Ideas arrive as voice notes; <code>/transcribe</code> turns them into local transcripts.</li>
+        <li><b>Plan, then build.</b> Big choices get asked as explicit either/or questions before code.</li>
+        <li><b>Demo mode is the test bench.</b> Verify locally with <code>?seed</code> and <code>?reset</code>.</li>
+        <li><b>Local preview stays simple.</b> <code>./play.sh demo</code> or <code>python3 -m http.server</code>; GitHub Pages once live.</li>
+        <li><b>Maintain the devlog.</b> End each session with a dated entry, decisions, and a screenshot when visual.</li>
+        <li><code>SECURITY.md</code> stays the canonical reference for keys, storage, and policies.</li>
+        <li>Say plainly that magic-link identity = inbox control; that's the trust anchor.</li>
+        <li>Pilot Season (~7 weeks) over a full quarter — test the rules before committing.</li>
+        <li>Seed seasons via migration — reproducible, versioned, no secrets in shell history.</li>
+        <li>Close public sign-ups in Supabase once both players are in.</li>
+      </ul>
+    </div>
+    <div><h3>Don'ts</h3>
+      <ul class="against">
+        <li><b>Raspberry Pi hosting</b> — local-only; awkward for a remote second player.</li>
+        <li><b>Player codes / Google OAuth</b> — magic links won on friction vs. realness.</li>
+        <li><b>FX conversion</b> — unnecessary once scoring is ratio-based.</li>
+        <li><b>Charts &amp; analytics</b> — against the spirit; numbers stay quiet.</li>
+        <li><b>A build step / framework</b> — vanilla modules keep deploys trivial and the code legible.</li>
+        <li><b>Yahoo dependency denial</b> — the unofficial API is fine for a friendly game, but replaceable only at the edge-function layer.</li>
+        <li><b>Notification decisions too early</b> — email vs Telegram waits until the game is live.</li>
+        <li>Don't pretend the anon key is a secret — rotating or hiding it adds nothing once RLS does the work.</li>
+        <li>Don't use a stricter threat model than the project needs — proportionality: it's a game between friends, not a bank.</li>
+        <li>Don't script dashboard-only steps with borrowed credentials — two honest browser clicks instead.</li>
+        <li>Don't add a frozen "final value" column on seasons — snapshots reconstruct it.</li>
+        <li>Don't build in-game season administration yet — Season 1 gets seeded by hand.</li>
+        <li>Don't lock prices client-side — too forgeable, even among friends.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Timeline</h2>
+  <div class="phase"><span class="badge">done</span><div><b>Phase 0 — From idea to plan.</b> Voice note → transcript → <code>PLAN.md</code> → architecture decisions.</div></div>
+  <div class="phase"><span class="badge">done</span><div><b>Phase 1 — Playable game.</b> Sign-in, name, pick board, typeahead, locked prices, dashboard, demo mode.</div></div>
+  <div class="phase"><span class="badge">now</span><div><b>Phase 2 — Go live.</b> Schema pushed, functions deployed, Pilot Season seeded, config filled. Remaining: enable GitHub Pages + auth Site URL, invite player 2.</div></div>
+  <div class="phase"><span class="badge">next</span><div><b>Phase 3 — Season life.</b> Weekly updates, price history snapshots, season-end winner ceremony.</div></div>
+  <div class="phase"><span class="badge">later</span><div><b>Phase 4 — More life.</b> 3+ players, pick notes, season themes, archive of past seasons.</div></div>
+
+  <h3>Next steps</h3>
+  <ul>
+    <li>Enable GitHub Pages (branch <code>main</code>, root) → <code>https://hempfele.github.io/stocks/</code>.</li>
+    <li>Supabase auth URL configuration: Site URL = Pages URL, allow <code>http://localhost:8765/*</code>.</li>
+    <li>Both players sign in → disable public sign-ups → first real picks with live quotes.</li>
+    <li>First weekly check-in: does the Pilot Season feel right?</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Recent commits</h2>
+  <p class="section-note">Grouped by the phase they moved forward. Phase 0 planning is part of the first scaffold commit rather than a separate commit.</p>
+  <h3>Phase 1 — Playable game</h3>
+  <ul>
+    <li><code>822320d</code> Fantasy Portfolio: playable scaffold, Supabase backend, devlog</li>
+  </ul>
+  <h3>Phase 2 — Go live</h3>
+  <ul>
+    <li><code>1cc5b70</code> Add price_snapshots, document go-live progress in docs and devlog</li>
+    <li><code>71f8d5d</code> Go live: real Supabase config, Pilot Season seed, devlog entry</li>
+    <li><code>c9a336b</code> Ignore supabase/.temp CLI state</li>
+    <li><code>ebcce2d</code> One-command local testing: play.sh with ?demo override</li>
+    <li><code>1bc5d75</code> Document security and data model: SECURITY.md + devlog post</li>
+    <li><code>1332239</code> Demo opponent is Hempf; Pages deploys from main</li>
+  </ul>
+</section>
+
+<footer>
+  Fantasy Portfolio · built by Bernd &amp; Claude · devlog format borrowed from ♨ OYU
+</footer>
+</main>
+<script src="play-link.js"></script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-# 🏛️ Fantasy Portfolio
+# Fantasy Portfolio
 
 A lightweight web game: build a **life portfolio** — 10 areas of life modeled after the
 hierarchy of needs, one stock for each. Picking locks the live price and virtually buys
@@ -6,24 +6,40 @@ hierarchy of needs, one stock for each. Picking locks the live price and virtual
 
 Not about money and analytics — about the companies that reflect the life you want to see.
 
-📋 Game design and phases: [PLAN.md](PLAN.md) · 📓 Devlog: [devlog/](devlog/) · 🔐 Security & data model: [SECURITY.md](SECURITY.md)
+Game design and phases: [PLAN.md](PLAN.md) · Devlog: [devlog/](devlog/) · Security & data model: [SECURITY.md](SECURITY.md)
 
 ## Test locally
 
-One command:
+Double-click:
+
+- macOS demo: `Play Fantasy Portfolio.command`
+- macOS live database: `Play Fantasy Portfolio Live.command`
+- Windows demo: `Play Fantasy Portfolio.bat`
+- Windows live database: `Play Fantasy Portfolio Live.bat`
+
+All launchers start a local server and open the browser. The demo launchers use fake local data; the live launchers use the real Supabase database, auth, and edge functions without needing a remote webserver.
+
+Or use the command line:
 
 ```sh
+./play.sh         # offline demo: fake players, pre-filled board, no real data touched
 ./play.sh demo    # offline demo: fake players, pre-filled board, no real data touched
 ./play.sh fresh   # offline demo from a blank slate
-./play.sh         # live backend: real magic-link sign-in and real picks
+./play.sh live    # live backend: real magic-link sign-in and real picks
 ```
 
 It starts a local server on port 8765 (if needed) and opens the game in your browser.
+If port 8765 is already serving a different folder, the script stops and tells you how to use another port.
 
 - Demo mode (`?demo` in the URL) runs entirely on fake data — even with a live
   `js/config.js`. Extra URL params: `&seed` pre-fills a board, `&reset` clears it.
+  Demo stock search uses a representative global catalog in `js/store.js`;
+  live mode searches through the Supabase edge function.
 - Live mode locally requires `http://localhost:8765/*` in Supabase → Auth →
   URL Configuration → Redirect URLs (magic links must be allowed to land there).
+  This gives you the real synced game experience from local files: players, picks,
+  prices, auth, and functions all go through Supabase; only the HTML/CSS/JS are
+  served from your machine.
 
 ## Go live (GitHub Pages + Supabase)
 

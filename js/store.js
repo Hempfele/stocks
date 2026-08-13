@@ -7,37 +7,149 @@ import { AREAS } from './areas.js';
 // ---------------------------------------------------------------- demo backend
 
 const CATALOG = [
-  { symbol: 'NESN.SW', name: 'Nestlé', exchange: 'SWX', base: 92 },
-  { symbol: 'KO', name: 'Coca-Cola', exchange: 'NYSE', base: 63 },
-  { symbol: 'OATLY', name: 'Oatly Group', exchange: 'NASDAQ', base: 1.2 },
+  // North America
+  { symbol: 'AAPL', name: 'Apple', exchange: 'NASDAQ', base: 215, aliases: ['iphone', 'mac'] },
+  { symbol: 'MSFT', name: 'Microsoft', exchange: 'NASDAQ', base: 430, aliases: ['windows', 'xbox', 'openai'] },
+  { symbol: 'GOOGL', name: 'Alphabet', exchange: 'NASDAQ', base: 175, aliases: ['google', 'youtube', 'android'] },
+  { symbol: 'AMZN', name: 'Amazon', exchange: 'NASDAQ', base: 185, aliases: ['aws', 'prime'] },
+  { symbol: 'META', name: 'Meta Platforms', exchange: 'NASDAQ', base: 505, aliases: ['facebook', 'instagram', 'whatsapp'] },
+  { symbol: 'NVDA', name: 'NVIDIA', exchange: 'NASDAQ', base: 120, aliases: ['ai', 'gpu'] },
+  { symbol: 'TSLA', name: 'Tesla', exchange: 'NASDAQ', base: 250, aliases: ['ev', 'electric car'] },
+  { symbol: 'NFLX', name: 'Netflix', exchange: 'NASDAQ', base: 650 },
+  { symbol: 'DIS', name: 'Walt Disney', exchange: 'NYSE', base: 105, aliases: ['disney', 'pixar', 'marvel'] },
+  { symbol: 'SPOT', name: 'Spotify', exchange: 'NYSE', base: 310, aliases: ['music'] },
+  { symbol: 'DUOL', name: 'Duolingo', exchange: 'NASDAQ', base: 230, aliases: ['language learning'] },
+  { symbol: 'ABNB', name: 'Airbnb', exchange: 'NASDAQ', base: 145, aliases: ['travel'] },
+  { symbol: 'BKNG', name: 'Booking Holdings', exchange: 'NASDAQ', base: 3900, aliases: ['booking.com'] },
+  { symbol: 'NKE', name: 'Nike', exchange: 'NYSE', base: 92 },
+  { symbol: 'SBUX', name: 'Starbucks', exchange: 'NASDAQ', base: 88, aliases: ['coffee'] },
+  { symbol: 'MCD', name: "McDonald's", exchange: 'NYSE', base: 285 },
+  { symbol: 'KO', name: 'Coca-Cola', exchange: 'NYSE', base: 63, aliases: ['coke'] },
+  { symbol: 'PEP', name: 'PepsiCo', exchange: 'NASDAQ', base: 170, aliases: ['pepsi'] },
+  { symbol: 'OATLY', name: 'Oatly Group', exchange: 'NASDAQ', base: 1.2, aliases: ['oat milk'] },
+  { symbol: 'COST', name: 'Costco Wholesale', exchange: 'NASDAQ', base: 850 },
+  { symbol: 'WMT', name: 'Walmart', exchange: 'NYSE', base: 70 },
   { symbol: 'HD', name: 'Home Depot', exchange: 'NYSE', base: 345 },
-  { symbol: 'VNA.DE', name: 'Vonovia', exchange: 'XETRA', base: 28 },
-  { symbol: 'NOVO-B.CO', name: 'Novo Nordisk', exchange: 'CPH', base: 620 },
-  { symbol: 'FME.DE', name: 'Fresenius Medical Care', exchange: 'XETRA', base: 38 },
-  { symbol: 'VWS.CO', name: 'Vestas Wind Systems', exchange: 'CPH', base: 160 },
-  { symbol: 'IBE.MC', name: 'Iberdrola', exchange: 'BME', base: 12 },
-  { symbol: 'ENPH', name: 'Enphase Energy', exchange: 'NASDAQ', base: 110 },
+  { symbol: 'PG', name: 'Procter & Gamble', exchange: 'NYSE', base: 165, aliases: ['p&g'] },
+  { symbol: 'JNJ', name: 'Johnson & Johnson', exchange: 'NYSE', base: 155 },
+  { symbol: 'LLY', name: 'Eli Lilly', exchange: 'NYSE', base: 820 },
+  { symbol: 'UNH', name: 'UnitedHealth Group', exchange: 'NYSE', base: 500 },
+  { symbol: 'PFE', name: 'Pfizer', exchange: 'NYSE', base: 28 },
+  { symbol: 'JPM', name: 'JPMorgan Chase', exchange: 'NYSE', base: 200 },
+  { symbol: 'V', name: 'Visa', exchange: 'NYSE', base: 275 },
+  { symbol: 'MA', name: 'Mastercard', exchange: 'NYSE', base: 470 },
+  { symbol: 'PYPL', name: 'PayPal', exchange: 'NASDAQ', base: 65 },
+  { symbol: 'SQ', name: 'Block', exchange: 'NYSE', base: 75, aliases: ['square', 'cash app'] },
+  { symbol: 'XOM', name: 'Exxon Mobil', exchange: 'NYSE', base: 115 },
+  { symbol: 'NEE', name: 'NextEra Energy', exchange: 'NYSE', base: 75 },
+  { symbol: 'ENPH', name: 'Enphase Energy', exchange: 'NASDAQ', base: 110, aliases: ['solar'] },
+  { symbol: 'FSLR', name: 'First Solar', exchange: 'NASDAQ', base: 260, aliases: ['solar'] },
+  { symbol: 'CAT', name: 'Caterpillar', exchange: 'NYSE', base: 340 },
+  { symbol: 'DE', name: 'Deere & Company', exchange: 'NYSE', base: 380, aliases: ['john deere'] },
+  { symbol: 'BA', name: 'Boeing', exchange: 'NYSE', base: 180 },
+  { symbol: 'RKLB', name: 'Rocket Lab', exchange: 'NASDAQ', base: 7, aliases: ['space'] },
+  { symbol: 'PLTR', name: 'Palantir', exchange: 'NASDAQ', base: 25 },
+  { symbol: 'SHOP.TO', name: 'Shopify', exchange: 'TSX', base: 90 },
+  { symbol: 'RY.TO', name: 'Royal Bank of Canada', exchange: 'TSX', base: 140, aliases: ['rbc'] },
+  { symbol: 'TD.TO', name: 'Toronto-Dominion Bank', exchange: 'TSX', base: 80, aliases: ['td bank'] },
+  { symbol: 'MELI', name: 'MercadoLibre', exchange: 'NASDAQ', base: 1650, aliases: ['latin america ecommerce'] },
+
+  // Japan
+  { symbol: '7203.T', name: 'Toyota Motor', exchange: 'TYO', base: 3300, aliases: ['toyota'] },
+  { symbol: '6758.T', name: 'Sony Group', exchange: 'TYO', base: 13500, aliases: ['playstation'] },
+  { symbol: '7974.T', name: 'Nintendo', exchange: 'TYO', base: 8200 },
+  { symbol: 'NTDOY', name: 'Nintendo', exchange: 'OTC', base: 14 },
+  { symbol: '7453.T', name: 'Ryohin Keikaku', exchange: 'TYO', base: 2600, aliases: ['muji', '無印良品'] },
+  { symbol: '9983.T', name: 'Fast Retailing', exchange: 'TYO', base: 41000, aliases: ['uniqlo'] },
+  { symbol: '9984.T', name: 'SoftBank Group', exchange: 'TYO', base: 8800, aliases: ['softbank'] },
+  { symbol: '6861.T', name: 'Keyence', exchange: 'TYO', base: 70000 },
+  { symbol: '6501.T', name: 'Hitachi', exchange: 'TYO', base: 3600 },
+  { symbol: '8306.T', name: 'Mitsubishi UFJ Financial Group', exchange: 'TYO', base: 1550, aliases: ['mufg'] },
+  { symbol: '8058.T', name: 'Mitsubishi Corporation', exchange: 'TYO', base: 3100 },
+  { symbol: '8001.T', name: 'Itochu', exchange: 'TYO', base: 7600 },
+  { symbol: '6098.T', name: 'Recruit Holdings', exchange: 'TYO', base: 8600 },
+  { symbol: '4661.T', name: 'Oriental Land', exchange: 'TYO', base: 4300, aliases: ['tokyo disney'] },
+  { symbol: '7267.T', name: 'Honda Motor', exchange: 'TYO', base: 1650, aliases: ['honda'] },
+  { symbol: '4901.T', name: 'Fujifilm', exchange: 'TYO', base: 3700 },
+  { symbol: '2503.T', name: 'Kirin Holdings', exchange: 'TYO', base: 2100, aliases: ['kirin beer'] },
+  { symbol: '2914.T', name: 'Japan Tobacco', exchange: 'TYO', base: 4300, aliases: ['jt'] },
+  { symbol: 'SMNNY', name: 'Shimano', exchange: 'OTC', base: 18 },
+
+  // Europe
+  { symbol: 'ASML.AS', name: 'ASML Holding', exchange: 'AMS', base: 870 },
+  { symbol: 'SAP.DE', name: 'SAP', exchange: 'XETRA', base: 190 },
+  { symbol: 'SIE.DE', name: 'Siemens', exchange: 'XETRA', base: 175 },
+  { symbol: 'DTE.DE', name: 'Deutsche Telekom', exchange: 'XETRA', base: 23 },
   { symbol: 'ALV.DE', name: 'Allianz', exchange: 'XETRA', base: 260 },
   { symbol: 'MUV2.DE', name: 'Munich Re', exchange: 'XETRA', base: 430 },
-  { symbol: 'SMNNY', name: 'Shimano', exchange: 'OTC', base: 18 },
-  { symbol: 'TSLA', name: 'Tesla', exchange: 'NASDAQ', base: 250 },
-  { symbol: 'RACE', name: 'Ferrari', exchange: 'NYSE', base: 410 },
-  { symbol: 'DTE.DE', name: 'Deutsche Telekom', exchange: 'XETRA', base: 23 },
-  { symbol: 'AAPL', name: 'Apple', exchange: 'NASDAQ', base: 215 },
-  { symbol: 'NTDOY', name: 'Nintendo', exchange: 'OTC', base: 14 },
-  { symbol: 'DIS', name: 'Walt Disney', exchange: 'NYSE', base: 105 },
-  { symbol: 'SPOT', name: 'Spotify', exchange: 'NYSE', base: 310 },
-  { symbol: 'DUOL', name: 'Duolingo', exchange: 'NASDAQ', base: 230 },
-  { symbol: 'ASML', name: 'ASML Holding', exchange: 'AMS', base: 870 },
-  { symbol: 'SAP.DE', name: 'SAP', exchange: 'XETRA', base: 190 },
-  { symbol: 'RKLB', name: 'Rocket Lab', exchange: 'NASDAQ', base: 7 },
-  { symbol: 'NVDA', name: 'NVIDIA', exchange: 'NASDAQ', base: 120 },
-  { symbol: 'MSFT', name: 'Microsoft', exchange: 'NASDAQ', base: 430 },
-  { symbol: 'NKE', name: 'Nike', exchange: 'NYSE', base: 92 },
-  { symbol: 'SBUX', name: 'Starbucks', exchange: 'NASDAQ', base: 88 },
-  { symbol: 'ABNB', name: 'Airbnb', exchange: 'NASDAQ', base: 145 },
-  { symbol: 'BKNG', name: 'Booking Holdings', exchange: 'NASDAQ', base: 3900 },
+  { symbol: 'VNA.DE', name: 'Vonovia', exchange: 'XETRA', base: 28 },
+  { symbol: 'MBG.DE', name: 'Mercedes-Benz Group', exchange: 'XETRA', base: 65, aliases: ['mercedes'] },
+  { symbol: 'BMW.DE', name: 'BMW', exchange: 'XETRA', base: 88 },
+  { symbol: 'VOW3.DE', name: 'Volkswagen', exchange: 'XETRA', base: 110, aliases: ['vw'] },
+  { symbol: 'ADS.DE', name: 'Adidas', exchange: 'XETRA', base: 225 },
+  { symbol: 'RWE.DE', name: 'RWE', exchange: 'XETRA', base: 34 },
+  { symbol: 'AIR.PA', name: 'Airbus', exchange: 'PAR', base: 145 },
+  { symbol: 'OR.PA', name: "L'Oréal", exchange: 'PAR', base: 410, aliases: ['loreal'] },
+  { symbol: 'MC.PA', name: 'LVMH', exchange: 'PAR', base: 720, aliases: ['louis vuitton', 'moet hennessy'] },
+  { symbol: 'RMS.PA', name: 'Hermès', exchange: 'PAR', base: 2200, aliases: ['hermes'] },
+  { symbol: 'TTE.PA', name: 'TotalEnergies', exchange: 'PAR', base: 65, aliases: ['total'] },
+  { symbol: 'SAN.PA', name: 'Sanofi', exchange: 'PAR', base: 95 },
+  { symbol: 'AI.PA', name: 'Air Liquide', exchange: 'PAR', base: 165 },
+  { symbol: 'NESN.SW', name: 'Nestlé', exchange: 'SWX', base: 92, aliases: ['nestle'] },
+  { symbol: 'NOVN.SW', name: 'Novartis', exchange: 'SWX', base: 95 },
+  { symbol: 'ROG.SW', name: 'Roche', exchange: 'SWX', base: 270 },
+  { symbol: 'UBSG.SW', name: 'UBS Group', exchange: 'SWX', base: 28 },
+  { symbol: 'NOVO-B.CO', name: 'Novo Nordisk', exchange: 'CPH', base: 620 },
+  { symbol: 'VWS.CO', name: 'Vestas Wind Systems', exchange: 'CPH', base: 160, aliases: ['wind'] },
+  { symbol: 'MAERSK-B.CO', name: 'A.P. Moller - Maersk', exchange: 'CPH', base: 12000, aliases: ['maersk'] },
+  { symbol: 'IBE.MC', name: 'Iberdrola', exchange: 'BME', base: 12 },
+  { symbol: 'ITX.MC', name: 'Inditex', exchange: 'BME', base: 44, aliases: ['zara'] },
+  { symbol: 'EQNR.OL', name: 'Equinor', exchange: 'OSL', base: 300 },
+
+  // UK
+  { symbol: 'AZN.L', name: 'AstraZeneca', exchange: 'LSE', base: 12000 },
+  { symbol: 'SHEL.L', name: 'Shell', exchange: 'LSE', base: 2800 },
+  { symbol: 'ULVR.L', name: 'Unilever', exchange: 'LSE', base: 4400 },
+  { symbol: 'HSBA.L', name: 'HSBC Holdings', exchange: 'LSE', base: 680 },
+  { symbol: 'GSK.L', name: 'GSK', exchange: 'LSE', base: 1600 },
+  { symbol: 'DGE.L', name: 'Diageo', exchange: 'LSE', base: 2600 },
+  { symbol: 'BP.L', name: 'BP', exchange: 'LSE', base: 480 },
+
+  // Asia-Pacific
+  { symbol: 'TSM', name: 'Taiwan Semiconductor Manufacturing', exchange: 'NYSE', base: 170, aliases: ['tsmc'] },
+  { symbol: '005930.KS', name: 'Samsung Electronics', exchange: 'KRX', base: 75000, aliases: ['samsung'] },
+  { symbol: '035420.KS', name: 'Naver', exchange: 'KRX', base: 180000 },
+  { symbol: '0700.HK', name: 'Tencent Holdings', exchange: 'HKEX', base: 370, aliases: ['wechat'] },
+  { symbol: '9988.HK', name: 'Alibaba Group', exchange: 'HKEX', base: 78, aliases: ['alibaba', 'taobao'] },
+  { symbol: 'BABA', name: 'Alibaba Group', exchange: 'NYSE', base: 80, aliases: ['alibaba', 'taobao'] },
+  { symbol: 'SE', name: 'Sea Limited', exchange: 'NYSE', base: 70, aliases: ['shopee', 'garena'] },
+  { symbol: 'BHP.AX', name: 'BHP Group', exchange: 'ASX', base: 45 },
+  { symbol: 'CSL.AX', name: 'CSL', exchange: 'ASX', base: 285 },
+  { symbol: 'CBA.AX', name: 'Commonwealth Bank of Australia', exchange: 'ASX', base: 120, aliases: ['cba'] },
+  { symbol: 'WES.AX', name: 'Wesfarmers', exchange: 'ASX', base: 65 },
+
+  // Broad market placeholders for demo players who think in funds.
+  { symbol: 'SPY', name: 'SPDR S&P 500 ETF Trust', exchange: 'NYSEARCA', base: 530, aliases: ['s&p 500', 'sp500'] },
+  { symbol: 'QQQ', name: 'Invesco QQQ Trust', exchange: 'NASDAQ', base: 450, aliases: ['nasdaq 100'] },
+  { symbol: 'VTI', name: 'Vanguard Total Stock Market ETF', exchange: 'NYSEARCA', base: 260, aliases: ['total market'] },
+  { symbol: 'VWCE.DE', name: 'Vanguard FTSE All-World ETF', exchange: 'XETRA', base: 120, aliases: ['all world', 'ftse all-world'] },
 ];
+
+function catalogText(entry) {
+  return [entry.symbol, entry.name, entry.exchange, ...(entry.aliases || [])]
+    .join(' ')
+    .toLowerCase();
+}
+
+function catalogScore(entry, needle) {
+  const symbol = entry.symbol.toLowerCase();
+  const name = entry.name.toLowerCase();
+  const aliases = (entry.aliases || []).map((alias) => alias.toLowerCase());
+  if (symbol === needle || name === needle || aliases.includes(needle)) return 0;
+  if (symbol.startsWith(needle)) return 1;
+  if (name.startsWith(needle) || aliases.some((alias) => alias.startsWith(needle))) return 2;
+  return 3;
+}
 
 const HEMPF_PICKS = {
   nourishment: 'NESN.SW', home: 'HD', health: 'NOVO-B.CO', energy: 'VWS.CO',
@@ -129,7 +241,8 @@ function createDemoStore() {
     async searchStocks(q) {
       const needle = q.toLowerCase();
       return CATALOG
-        .filter((c) => c.symbol.toLowerCase().includes(needle) || c.name.toLowerCase().includes(needle))
+        .filter((c) => catalogText(c).includes(needle))
+        .sort((a, b) => catalogScore(a, needle) - catalogScore(b, needle) || a.name.localeCompare(b.name))
         .slice(0, 8);
     },
     async makePick(seasonId, areaKey, stock) {

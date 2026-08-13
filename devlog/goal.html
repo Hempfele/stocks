@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fantasy Portfolio — Goal</title>
+<link rel="icon" href="../assets/fantasy-portfolio-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="nav-left">
+    <a class="blog-title" href="./"><img class="brand-mark" src="../assets/fantasy-portfolio-icon.svg" alt="">Fantasy Portfolio</a>
+    <nav aria-label="Devlog">
+      <a class="active" href="goal.html">Goal</a>
+      <a href="decisions.html">Decisions</a>
+    </nav>
+  </div>
+  <div class="nav-right">
+    <a class="play-link" href="../index.html">Play</a>
+  </div>
+</header>
+
+<main id="top">
+<header class="hero">
+  <h1>Goal</h1>
+  <p class="short"><b>Not about the money.</b> Build a portfolio that feels right: ten areas of life, one company for each, chosen for the future you want to support.</p>
+  <ul class="hero-points">
+    <li><b>Values over analytics</b> — the choice shouldn't be based on price charts; it's about the companies you want to support and the life you want to see.</li>
+    <li><b>Self-portrait, not prediction</b> — ten picks should say something about a person, not just their appetite for returns.</li>
+  </ul>
+</header>
+
+<section>
+  <h2>Gameplay</h2>
+  <ul>
+    <li><b>Two players to start.</b> More can come later, but the first version is intimate and easy to understand.</li>
+    <li><b>Ten life areas.</b> Each area is modeled after the hierarchy of needs, from nourishment to dreams and frontier.</li>
+    <li><b>One company per area.</b> Picking locks the live price and virtually buys <b>€1,000</b> of that stock.</li>
+    <li><b>Shared board.</b> Every player sees every other player's picks; the fun is in comparing worldviews.</li>
+    <li><b>Season format.</b> Picks lock during a season, values evolve over time, and there is a winner at the end.</li>
+    <li><b>Fair scoring.</b> Each pick is worth €1,000 × current / locked price, so mixed currencies compare cleanly.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Requirements</h2>
+  <ul>
+    <li><b>Lightweight feel.</b> No finance-app energy: numbers stay understated, no charts, no jargon. Picks and their stories come first.</li>
+    <li><b>No build step.</b> Vanilla ES modules; the repo deploys to GitHub Pages as-is.</li>
+    <li><b>Demo mode first.</b> Empty <code>js/config.js</code> runs the full game on fake data.</li>
+    <li><b>Locked means locked.</b> Picks are insert-only and written server-side.</li>
+  </ul>
+  <p class="section-note">Canonical source: <code>PLAN.md</code> in the repo · original voice note transcript: <code>Fantasy Portfolio.transcript.md</code>.</p>
+</section>
+
+<section>
+  <h2>Open questions</h2>
+  <ul>
+    <li>Pick notes ("why this company") are probably the soul of the game once added.</li>
+    <li>What should a gentle season-end ceremony feel like?</li>
+    <li>Could the areas themselves become seasonal themes?</li>
+  </ul>
+</section>
+
+<footer>
+  Fantasy Portfolio · built by Bernd &amp; Claude · devlog format borrowed from ♨ OYU
+</footer>
+</main>
+<script src="play-link.js"></script>
+</body>
+</html>
